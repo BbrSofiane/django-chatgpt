@@ -1,0 +1,145 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = [
+  "poetry-core",
+]
+
+[tool.mypy]
+python_version = "3.10"
+check_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+plugins = [
+    "mypy_django_plugin.main",
+]
+exclude = [
+    "/migrations/",
+]
+
+[tool.poetry]
+name = "django_chatgpt"
+version = "0.1.0"
+description = ""
+authors = [
+    "Sofiane Bebert <s.bebert@diceytech.co.uk>",
+]
+license = ""
+readme = "README.md"
+packages = [
+    { include = "django_chatgpt" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Pillow = "^9.4.0"
+argon2-cffi = "^21.3.0"
+pytailwindcss = "^0.1.4"
+hiredis = "^2.2.2"
+redis = "^4.5.1"
+Django = "^4.1.7"
+django-environ = "^0.9.0"
+django-model-utils = "^4.3.1"
+django-allauth = "^0.52.0"
+django-render-block = "^0.9.2"
+django-extensions = "^3.2.1"
+django-improved-user = "2.0a2"
+django-htmx = "^1.13.0"
+gunicorn = "^20.1.0"
+psycopg2 = "^2.9.5"
+sentry-sdk = "^1.15.0"
+
+[tool.poetry.dependencies.django-anymail]
+extras = [
+    "amazon_ses",
+]
+version = "^9.0"
+
+[tool.poetry.dependencies.whitenoise]
+extras = [
+    "brotli",
+]
+version = "^6.3.0"
+
+[tool.poetry.group.dev.dependencies]
+django-browser-reload = "^1.6.0"
+django-debug-toolbar = "^3.8.1"
+django-fastdev = "^1.7.3"
+ipython = "^8.10.0"
+pywatchman = "^1.4.1"
+coverage = "^7.1.0"
+pytest = "^7.2.1"
+pytest-django = "^4.5.2"
+pytest-sugar = "^0.9.6"
+mypy = "^1.0.0"
+django-stubs = "^1.14.0"
+bandit = "^1.7.4"
+poethepoet = "^0.18.1"
+
+[tool.poetry.group.dev.dependencies.Werkzeug]
+extras = [
+    "watchdog",
+]
+version = "^2.2.3"
+
+[tool.poe.tasks]
+RD = [
+    "rd",
+    "rm",
+    "mk",
+    "m",
+]
+
+[tool.poe.tasks.r]
+cmd = "python manage.py runserver --nostatic"
+help = "Start dev serve"
+
+[tool.poe.tasks.u]
+cmd = "python manage.py makesuperuser"
+help = "Create a new superuser using environment varibales, look in your .env.template file"
+
+[tool.poe.tasks.m]
+cmd = "python manage.py migrate"
+help = "Apply migrations"
+
+[tool.poe.tasks.mk]
+cmd = "python manage.py makemigrations"
+help = "Make migrations"
+
+[tool.poe.tasks.rd]
+cmd = "python manage.py reset_db --noinput"
+help = "Delete and recreate your database"
+
+[tool.poe.tasks.t]
+cmd = "tailwindcss -i django_chatgpt/static/css/input.css -o django_chatgpt/static/css/output.css --watch"
+help = "Compile tailwind in watch mode"
+
+[tool.poe.tasks.rm]
+cmd = "cuzzy rm-migrations django_chatgpt"
+help = "Delete all migrations files"
+
+[tool.cuzzy]
+work = [
+    "poe r",
+    "poe t",
+]
+
+[tool.ruff]
+line-length = 120
+select = [
+    "E",
+    "F",
+    "UP",
+    "N",
+    "S",
+    "C",
+    "B",
+    "T",
+]
+extend-exclude = [
+    "*/migrations/*",
+]
+
+[tool.django-stubs]
+django_settings_module = "config.settings"
