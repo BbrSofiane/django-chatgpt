@@ -6,7 +6,8 @@
 image: gitpod/workspace-postgres
 
 tasks:
-  - init: |
+  - init: setup
+    command: |
       poetry shell
       poetry install
 
