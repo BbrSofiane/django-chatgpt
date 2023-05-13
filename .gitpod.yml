@@ -6,9 +6,16 @@
 image: gitpod/workspace-postgres
 
 tasks:
-  - init: setup
-    command: |
+  - init: |
       poetry shell
       poetry install
+      pre-commit install
+      
+ports:
+- port: 8000
+  visibility: private
+  onOpen: open-preview
 
-
+vscode:
+  extensions:
+    - ms-python.python
