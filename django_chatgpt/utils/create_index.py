@@ -1,7 +1,8 @@
 import os
 
 from dotenv import load_dotenv
-from llama_index import GPTVectorStoreIndex, QuestionAnswerPrompt, download_loader
+from llama_index import download_loader
+from llama_index import GPTVectorStoreIndex
 
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")

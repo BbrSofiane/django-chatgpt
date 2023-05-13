@@ -44,7 +44,7 @@ if DEBUG:
         "django_fastdev",
     ]
 
-LOCAL_APPS = ["django_chatgpt.core", "django_chatgpt.users"]
+LOCAL_APPS = ["django_chatgpt.core", "django_chatgpt.users", "django_chatgpt.api"]
 
 INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + DJANGO_APPS
 
@@ -95,6 +95,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {"default": env.db("DATABASE_URL", default="postgres:///django_chatgpt")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
+DATABASES["default"]["NAME"] = "postgres"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATIC_URL = "/static/"
