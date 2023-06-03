@@ -1,16 +1,15 @@
 import os
 
 from dotenv import load_dotenv
-from llama_index import download_loader
 from llama_index import GPTVectorStoreIndex
+from llama_index import SimpleWebPageReader
 
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
-SimpleWebPageReader = download_loader("SimpleWebPageReader")
+reader = SimpleWebPageReader(html_to_text=True)
 
-loader = SimpleWebPageReader()
-documents = loader.load_data(
+documents = reader.load_data(
     urls=["https://testdriven.io/blog/django-custom-user-model/"]
 )
 
