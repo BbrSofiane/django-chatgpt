@@ -1,5 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-    Home page
+<div class="container mx-auto py-8">
+    <div class="bg-white shadow-lg rounded-lg p-8">
+      <h1 class="text-3xl font-bold mb-4">Ask a Question</h1>
+      <textarea id="answer" class="w-full h-64 p-4 bg-gray-100 mb-4" readonly></textarea>
+      <!-- Loading message -->
+      <!-- Loading spinner -->
+
+      <div class="items-center space-x-4">
+        <form
+            class="flex space-x-4"
+            hx-post="{% url 'ask' %}"
+            hx-target="#answer"
+            hx-trigger="submit"
+            hx-indicator="#loading">
+            <input id="question" name="question" type="text" placeholder="Type your question here" class="p-4 border rounded-lg w-full h-8">
+            <button
+                type="submit"
+                class="bg-blue-500 text-white py-3 px-6 rounded-lg ml-2 h-8">
+            Ask
+            </button>
+            <div
+              id="loading"
+              class="htmx-indicator w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin mx-auto my-8"
+            ></div>
+        </form>
+      </div>
+      <div class="htmx-indicator h-2 w-2 bg-blue-500 invisible rounded-full">Loading ...</div>
+    </div>
+  </div>
 {% endblock content %}

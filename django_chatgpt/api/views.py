@@ -1,6 +1,6 @@
 import os
 
-from django.http import JsonResponse
+from django.http import HttpResponse
 from dotenv import load_dotenv
 from llama_index import load_index_from_storage
 from llama_index import QuestionAnswerPrompt
@@ -8,9 +8,11 @@ from llama_index import StorageContext
 
 
 def ask(request):
-    query_str = request.GET.get("question", None)
+    """ """
+    query_str = request.POST.get("question")
+
     if not query_str:
-        return JsonResponse({"error": "Please provide a question."}, status=400)
+        return HttpResponse("Please provide a question.", status=200)
 
     load_dotenv()
     os.environ.get("OPENAI_API_KEY")
@@ -34,4 +36,4 @@ def ask(request):
     query_engine = index.as_query_engine(text_qa_template=qa_prompt)
     answer = query_engine.query(query_str)
 
-    return JsonResponse({"answer": str(answer)}, status=200)
+    return HttpResponse(answer, status=200)

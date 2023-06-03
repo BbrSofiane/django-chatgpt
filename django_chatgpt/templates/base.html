@@ -12,8 +12,8 @@
     <script defer src="{% static "vendors/htmx/htmx.min.js" %}"></script>
     {% django_htmx_script %}
 </head>
-<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-{% block content %}
-{% endblock content %}
-</body>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="bg-gray-100 min-h-screen">
+    {% block content %}
+    {% endblock content %}
+    </body>
 </html>

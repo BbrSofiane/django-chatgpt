@@ -35,7 +35,6 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "django_extensions",
     "django_htmx",
-    "corsheaders",
 ]
 
 if DEBUG:
